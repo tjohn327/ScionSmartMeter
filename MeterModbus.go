@@ -1,15 +1,18 @@
 package main
 
 import (
-	"log"
+	"time"
 
 	"github.com/ScionSmartMeter/meter"
 )
 
 func main() {
 	meter.Init()
-	freq, _ := meter.ReadFrequency()
-	volt, _ := meter.ReadVoltage()
-	log.Print(freq, volt)
-
+	var m meter.Reading
+	for {
+		m, _ = meter.ReadMeter()
+		m.Print()
+		time.Sleep(time.Second)
+		break
+	}
 }
