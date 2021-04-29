@@ -1,0 +1,862 @@
+[
+    {
+        "id": "6f919979.ad0e78",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "15b70bc.83c08f4",
+        "type": "http request",
+        "z": "6f919979.ad0e78",
+        "name": "connect",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:4567/connect/{{{server}}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 600,
+        "y": 180,
+        "wires": [
+            [
+                "732487ef.36636",
+                "4e700568.3a9114"
+            ]
+        ]
+    },
+    {
+        "id": "b0c218df.6d4fb",
+        "type": "http request",
+        "z": "6f919979.ad0e78",
+        "name": "connect_power",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:4567/power/connect",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 620,
+        "y": 300,
+        "wires": [
+            [
+                "732487ef.36636"
+            ]
+        ]
+    },
+    {
+        "id": "dc8d87d5.79598",
+        "type": "http request",
+        "z": "6f919979.ad0e78",
+        "name": "disconnect_power",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:4567/power/disconnect",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 630,
+        "y": 340,
+        "wires": [
+            [
+                "732487ef.36636"
+            ]
+        ]
+    },
+    {
+        "id": "319387c9.bcd0a8",
+        "type": "http request",
+        "z": "6f919979.ad0e78",
+        "name": "readMeter",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:4567/readmeter",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 610,
+        "y": 380,
+        "wires": [
+            [
+                "c5d54242.a9974",
+                "eb46ce0a.fe4ce",
+                "86a24574.770d1",
+                "b6b7233a.105208",
+                "15b49f82.0ec628",
+                "f03d07bb.05b218",
+                "1c619a68.74c0ae",
+                "7e4b6e1.734ea9",
+                "e8d2773.6cee308",
+                "7c658de0.dd441c",
+                "606156c5.894"
+            ]
+        ]
+    },
+    {
+        "id": "d2364463.6d1f08",
+        "type": "ui_text",
+        "z": "6f919979.ad0e78",
+        "group": "a7bd1dc.6aab06",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Power",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 1050,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "4d6e4358.cd0a04",
+        "type": "ui_text",
+        "z": "6f919979.ad0e78",
+        "group": "a7bd1dc.6aab06",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Message",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 1060,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "972eb09a.461bf",
+        "type": "ui_form",
+        "z": "6f919979.ad0e78",
+        "name": "ServerAddress",
+        "label": "",
+        "group": "c83a7f1a.04acd",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Meter Address",
+                "value": "server",
+                "type": "text",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "server": ""
+        },
+        "payload": "",
+        "submit": "Connect",
+        "cancel": "Clear",
+        "topic": "",
+        "x": 140,
+        "y": 180,
+        "wires": [
+            [
+                "4a0eee1e.d281a8"
+            ]
+        ]
+    },
+    {
+        "id": "4a0eee1e.d281a8",
+        "type": "change",
+        "z": "6f919979.ad0e78",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "server",
+                "pt": "msg",
+                "to": "payload.server",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 360,
+        "y": 180,
+        "wires": [
+            [
+                "15b70bc.83c08f4"
+            ]
+        ]
+    },
+    {
+        "id": "c5d54242.a9974",
+        "type": "ui_text",
+        "z": "6f919979.ad0e78",
+        "group": "71a3bcdc.ce26e4",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "voltage",
+        "label": "Voltage",
+        "format": "{{msg.payload.Voltage}} V",
+        "layout": "row-spread",
+        "x": 1060,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "eb46ce0a.fe4ce",
+        "type": "ui_text",
+        "z": "6f919979.ad0e78",
+        "group": "71a3bcdc.ce26e4",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "current",
+        "label": "Current",
+        "format": "{{msg.payload.Current}} A",
+        "layout": "row-spread",
+        "x": 1060,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "b6b7233a.105208",
+        "type": "ui_text",
+        "z": "6f919979.ad0e78",
+        "group": "71a3bcdc.ce26e4",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "activepower",
+        "label": "Active Power",
+        "format": "{{msg.payload.ActivePower}} kW",
+        "layout": "row-spread",
+        "x": 1070,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "86a24574.770d1",
+        "type": "ui_text",
+        "z": "6f919979.ad0e78",
+        "group": "71a3bcdc.ce26e4",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "frequency",
+        "label": "Frequency",
+        "format": "{{msg.payload.Frequency}} Hz",
+        "layout": "row-spread",
+        "x": 1060,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "15b49f82.0ec628",
+        "type": "ui_text",
+        "z": "6f919979.ad0e78",
+        "group": "71a3bcdc.ce26e4",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "ReactivePower",
+        "label": "Reactive Power",
+        "format": "{{msg.payload.ReactivePower}} kvar",
+        "layout": "row-spread",
+        "x": 1080,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "f03d07bb.05b218",
+        "type": "ui_text",
+        "z": "6f919979.ad0e78",
+        "group": "71a3bcdc.ce26e4",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "ApparentPower",
+        "label": "Apparent Power",
+        "format": "{{msg.payload.ApparentPower}} kVA",
+        "layout": "row-spread",
+        "x": 1080,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "1c619a68.74c0ae",
+        "type": "ui_text",
+        "z": "6f919979.ad0e78",
+        "group": "71a3bcdc.ce26e4",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "name": "PowerFactor",
+        "label": "PowerFactor",
+        "format": "{{msg.payload.PowerFactor}} ",
+        "layout": "row-spread",
+        "x": 1070,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "7e4b6e1.734ea9",
+        "type": "ui_text",
+        "z": "6f919979.ad0e78",
+        "group": "71a3bcdc.ce26e4",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "name": "ActiveEnergy",
+        "label": "ActiveEnergy",
+        "format": "{{msg.payload.ActiveEnergy}} kWh",
+        "layout": "row-spread",
+        "x": 1070,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "e8d2773.6cee308",
+        "type": "ui_text",
+        "z": "6f919979.ad0e78",
+        "group": "71a3bcdc.ce26e4",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "name": "ReactiveEnergy",
+        "label": "ReactiveEnergy",
+        "format": "{{msg.payload.ReactiveEnergy}} kvarh",
+        "layout": "row-spread",
+        "x": 1080,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "e71e2f95.faa628",
+        "type": "ui_button",
+        "z": "6f919979.ad0e78",
+        "name": "",
+        "group": "c83a7f1a.04acd",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Read Meter",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 130,
+        "y": 380,
+        "wires": [
+            [
+                "319387c9.bcd0a8"
+            ]
+        ]
+    },
+    {
+        "id": "e4b4a268.66cf68",
+        "type": "ui_form",
+        "z": "6f919979.ad0e78",
+        "name": "Setmessage",
+        "label": "",
+        "group": "c83a7f1a.04acd",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Message",
+                "value": "message",
+                "type": "text",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "message": ""
+        },
+        "payload": "",
+        "submit": "Set Message",
+        "cancel": "Clear",
+        "topic": "",
+        "x": 130,
+        "y": 240,
+        "wires": [
+            [
+                "f8321c6c.777ae"
+            ]
+        ]
+    },
+    {
+        "id": "f8321c6c.777ae",
+        "type": "change",
+        "z": "6f919979.ad0e78",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "message",
+                "pt": "msg",
+                "to": "payload.message",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 240,
+        "wires": [
+            [
+                "74d449e.7454eb8"
+            ]
+        ]
+    },
+    {
+        "id": "74d449e.7454eb8",
+        "type": "http request",
+        "z": "6f919979.ad0e78",
+        "name": "set_message",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:4567/message/{{{message}}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 610,
+        "y": 240,
+        "wires": [
+            [
+                "4e700568.3a9114"
+            ]
+        ]
+    },
+    {
+        "id": "1d32e95b.71a617",
+        "type": "ui_button",
+        "z": "6f919979.ad0e78",
+        "name": "",
+        "group": "c83a7f1a.04acd",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Disconnect Power",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 150,
+        "y": 340,
+        "wires": [
+            [
+                "dc8d87d5.79598"
+            ]
+        ]
+    },
+    {
+        "id": "864378ff.ea88d8",
+        "type": "ui_button",
+        "z": "6f919979.ad0e78",
+        "name": "",
+        "group": "c83a7f1a.04acd",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Connect Power",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 140,
+        "y": 300,
+        "wires": [
+            [
+                "b0c218df.6d4fb"
+            ]
+        ]
+    },
+    {
+        "id": "2c3b6723.f897c8",
+        "type": "ui_chart",
+        "z": "6f919979.ad0e78",
+        "name": "",
+        "group": "a11196aa.8cf168",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "",
+        "removeOlder": "5",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "outputs": 1,
+        "x": 1050,
+        "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "732487ef.36636",
+        "type": "change",
+        "z": "6f919979.ad0e78",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.Power",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 880,
+        "y": 180,
+        "wires": [
+            [
+                "d2364463.6d1f08"
+            ]
+        ]
+    },
+    {
+        "id": "4e700568.3a9114",
+        "type": "change",
+        "z": "6f919979.ad0e78",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.Message",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 880,
+        "y": 260,
+        "wires": [
+            [
+                "4d6e4358.cd0a04"
+            ]
+        ]
+    },
+    {
+        "id": "43f3e88a.1c1628",
+        "type": "ui_button",
+        "z": "6f919979.ad0e78",
+        "name": "",
+        "group": "c83a7f1a.04acd",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Stop Reading",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "Stop",
+        "payloadType": "str",
+        "topic": "",
+        "x": 140,
+        "y": 600,
+        "wires": [
+            [
+                "1be93cdf.921adb"
+            ]
+        ]
+    },
+    {
+        "id": "e24aedbe.f08b",
+        "type": "debug",
+        "z": "6f919979.ad0e78",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "fd27d4ab.8cf098",
+        "type": "ui_button",
+        "z": "6f919979.ad0e78",
+        "name": "",
+        "group": "c83a7f1a.04acd",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Start Reading",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 140,
+        "y": 560,
+        "wires": [
+            [
+                "e79b1f24.db3d48"
+            ]
+        ]
+    },
+    {
+        "id": "7c658de0.dd441c",
+        "type": "function",
+        "z": "6f919979.ad0e78",
+        "name": "",
+        "func": "msg.payload = msg.payload.Voltage* msg.payload.Current;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 880,
+        "y": 740,
+        "wires": [
+            [
+                "e24aedbe.f08b",
+                "2c3b6723.f897c8"
+            ]
+        ]
+    },
+    {
+        "id": "cf227ba2.c961b",
+        "type": "inject",
+        "z": "6f919979.ad0e78",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 420,
+        "wires": [
+            [
+                "319387c9.bcd0a8"
+            ]
+        ]
+    },
+    {
+        "id": "3f3d215.33853de",
+        "type": "delay",
+        "z": "6f919979.ad0e78",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 600,
+        "y": 560,
+        "wires": [
+            [
+                "319387c9.bcd0a8"
+            ]
+        ]
+    },
+    {
+        "id": "1be93cdf.921adb",
+        "type": "function",
+        "z": "6f919979.ad0e78",
+        "name": "",
+        "func": "global.set(\"reading\",0);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 320,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e79b1f24.db3d48",
+        "type": "function",
+        "z": "6f919979.ad0e78",
+        "name": "",
+        "func": "global.set(\"reading\",1);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 320,
+        "y": 560,
+        "wires": [
+            [
+                "3f3d215.33853de"
+            ]
+        ]
+    },
+    {
+        "id": "39c602f0.31e7d6",
+        "type": "switch",
+        "z": "6f919979.ad0e78",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 450,
+        "y": 520,
+        "wires": [
+            [
+                "3f3d215.33853de"
+            ]
+        ]
+    },
+    {
+        "id": "606156c5.894",
+        "type": "function",
+        "z": "6f919979.ad0e78",
+        "name": "",
+        "func": "var read = global.get(\"reading\");\nif(read == 1){\n    msg.payload = 1;\n}else{\n    msg.paylaod = 0;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 320,
+        "y": 520,
+        "wires": [
+            [
+                "39c602f0.31e7d6"
+            ]
+        ]
+    },
+    {
+        "id": "a7bd1dc.6aab06",
+        "type": "ui_group",
+        "name": "Meter Status",
+        "tab": "75dc671d.5f499",
+        "order": 3,
+        "disp": true,
+        "width": "11",
+        "collapse": false
+    },
+    {
+        "id": "c83a7f1a.04acd",
+        "type": "ui_group",
+        "name": "Meter Parameters",
+        "tab": "75dc671d.5f499",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "71a3bcdc.ce26e4",
+        "type": "ui_group",
+        "name": "Meter Reading",
+        "tab": "75dc671d.5f499",
+        "order": 2,
+        "disp": true,
+        "width": "5",
+        "collapse": false
+    },
+    {
+        "id": "a11196aa.8cf168",
+        "type": "ui_group",
+        "name": "Power Consumption in Watts",
+        "tab": "75dc671d.5f499",
+        "order": 4,
+        "disp": true,
+        "width": "11",
+        "collapse": false
+    },
+    {
+        "id": "75dc671d.5f499",
+        "type": "ui_tab",
+        "name": "Scion Smart Meter",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
